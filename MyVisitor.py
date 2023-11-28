@@ -135,46 +135,32 @@ class MyVisitor(GramaticaVisitor):
     return matriz
 
   def dibujarMatriz(self, matriz, capas):
-
-    num_matrices = len(matriz)
-
-    if (num_matrices == 1):
-      plt.imshow(matriz[0], cmap='viridis', interpolation='nearest')
-
-      # Añadir una barra de color para referencia
+  # Define un nuevo colormap personalizado
+  custom_cmap = plt.cm.colors.ListedColormap(['white', 'green', 'yellow', '#FFDAB9', '#FFA500', '#8B4513'])
+  num_matrices = len(matriz)
+  if (num_matrices == 1):
+      plt.imshow(matriz[0], cmap=custom_cmap, interpolation='nearest')
       plt.colorbar()
-
-      # Mostrar el gráfico
       plt.show()
-    elif (num_matrices == 2):
-      fig, axs = plt.subplots(1, 2, figsize=(15, 5))  # 1 fila, 2 columnas
-      axs[0].imshow(matriz[0], cmap='viridis', interpolation='nearest')
+  elif (num_matrices == 2):
+      fig, axs = plt.subplots(1, 2, figsize=(15, 5))
+      axs[0].imshow(matriz[0], cmap=custom_cmap, interpolation='nearest')
       axs[0].set_title('Matriz 1')
-
-      axs[1].imshow(matriz[1], cmap='viridis', interpolation='nearest')
+      axs[1].imshow(matriz[1], cmap=custom_cmap, interpolation='nearest')
       axs[1].set_title('Matriz 2')
       plt.show()
-    else:
+  else:
       num_filas = int(np.ceil(np.sqrt(num_matrices)))
       num_columnas = int(np.ceil(num_matrices / num_filas))
-      # Configurar subgráficos
       fig, axs = plt.subplots(num_filas, num_columnas, figsize=(4, 4))
-
-      # Graficar cada matriz en un subgráfico
       for i in range(0, num_matrices):
-        fila = i // num_columnas
-        columna = i % num_columnas
-        axs[fila, columna].imshow(matriz[i],
-                                  cmap='viridis',
-                                  interpolation='nearest')
-        axs[fila, columna].set_title(f'Matriz {i + 1}')
-
-      # Ajustar el diseño para evitar superposiciones
+          fila = i // num_columnas
+          columna = i % num_columnas
+          axs[fila, columna].imshow(matriz[i], cmap=custom_cmap, interpolation='nearest')
+          axs[fila, columna].set_title(f'Matriz {i + 1}')
       plt.tight_layout()
-
-      # Mostrar el gráfico
       plt.show()
-    return True
+  return True
 
   def visitApagar(self, ctx):
     return False
