@@ -8,13 +8,24 @@ ESPACIO:  INT ;
 CAPAS:  INT ;
 ITERACIONES:  INT ;
 PACIENTE0 : '(' INT ',' INT ',' INT ')';
-RUN: 'run(' ESPACIO ',' CAPAS ',' ITERACIONES ')';
-RUN2: 'run(' ESPACIO ',' CAPAS ',' ITERACIONES ',' PACIENTE0 ')';
-RUN3: 'run(' ESPACIO ',' CAPAS ')';
+apagar: 'apagar';
+
+
+
+
 
 
 // Reglas de la gramática extendida
 //compilar: antlr4 -visitor -no-listener -Dlanguage=Python3 Gramatica.g4
 prog : statement+ ;
-// run((5),(3),(4))
-statement : RUN | RUN2 | RUN3 ;
+
+runStatemen: 'run(' INT ',' INT ')';
+runItStatemen: 'run(' INT ',' INT ',' INT ')';
+runItPStatemen: 'run(' INT ',' INT ',' INT ',(' INT ',' INT ',' INT ')';
+
+statement : runStatemen | runItStatemen | runItPStatemen | apagar;
+
+
+
+
+

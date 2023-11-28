@@ -9,8 +9,28 @@ else:
 
 class GramaticaVisitor(ParseTreeVisitor):
 
+    # Visit a parse tree produced by GramaticaParser#apagar.
+    def visitApagar(self, ctx:GramaticaParser.ApagarContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by GramaticaParser#prog.
     def visitProg(self, ctx:GramaticaParser.ProgContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GramaticaParser#runStatemen.
+    def visitRunStatemen(self, ctx:GramaticaParser.RunStatemenContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GramaticaParser#runItStatemen.
+    def visitRunItStatemen(self, ctx:GramaticaParser.RunItStatemenContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by GramaticaParser#runItPStatemen.
+    def visitRunItPStatemen(self, ctx:GramaticaParser.RunItPStatemenContext):
         return self.visitChildren(ctx)
 
 

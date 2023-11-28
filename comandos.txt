@@ -1,1 +1,2 @@
 antlr4 -visitor -no-listener -Dlanguage=Python3 Gramatica.g4
+python3 Certamen1.py
