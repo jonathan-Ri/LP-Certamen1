@@ -4,10 +4,6 @@ ID : [a-zA-Z]+ ; // Identificadores
 INT : [0-9]+ ;   // Números enteros
 NEXLINE: '\r'?'\n';
 WS : [ \t]+ -> skip ; // Espacios en blanco
-ESPACIO:  INT ;
-CAPAS:  INT ;
-ITERACIONES:  INT ;
-PACIENTE0 : '(' INT ',' INT ',' INT ')';
 apagar: 'apagar';
 
 

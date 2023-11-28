@@ -36,7 +36,6 @@ class MyVisitor(GramaticaVisitor):
     ]
     matriz[self.paciente0[0]][self.paciente0[1]][self.paciente0[2]] = 2
     print(self.paciente0)
-    print("matriz antes:\n", matriz[0])
 
     print("matriz antes:\n", matriz)
     matriz = self.infestar(espacio, capas, matriz)
@@ -116,6 +115,7 @@ class MyVisitor(GramaticaVisitor):
     return vecinos
 
   def infestar(self, espacio, capas, matriz):
+    expuestosNuevos = []
     for i in range(0, espacio):
       for j in range(0, espacio):
         for z in range(0, capas):
@@ -123,13 +123,15 @@ class MyVisitor(GramaticaVisitor):
             infestado = [i, j, z]
             vecinos = self.vecinos(infestado, espacio, capas)
             for y in range(0, len(vecinos)):
-              if matriz[vecinos[y][0]][vecinos[y][1]][vecinos[y][2]] in [
-                  0, 1, 2, 3, 4
-              ]:
-                matriz[vecinos[y][0]][vecinos[y][1]][vecinos[y][2]] = (
-                    matriz[vecinos[y][0]][vecinos[y][1]][vecinos[y][2]] + 1)
-              elif matriz[vecinos[y][0]][vecinos[y][1]][vecinos[y][2]] > 4:
-                matriz[vecinos[y][0]][vecinos[y][1]][vecinos[y][2]] = 0
+              if matriz[vecinos[y][0]][vecinos[y][1]][vecinos[y][2]] == 0:
+                matriz[vecinos[y][0]][vecinos[y][1]][vecinos[y][2]] = 1
+                expuestosNuevos.append(
+                    [vecinos[y][0], vecinos[y][1], vecinos[y][2]])
+    for x in range(0, espacio):
+      for y in range(0, espacio):
+        for k in range(0, capas):
+          if ([x, y, k] not in expuestosNuevos) and (matriz[x][y][k] != 0):
+            matriz[x][y][k] = matriz[x][y][k] + 1
     return matriz
 
   def dibujarMatriz(self, matriz, capas):
